@@ -1,0 +1,108 @@
+.keyboard {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    height: 90%;
+    width: 30%;
+    border: 1px solid black;
+    display: flex;
+    background-color: rgba(240, 248, 255, 0.397);
+    border-radius: 10px;
+}
+
+html, body {
+    overflow-y: hidden;
+    overflow-x: hidden;
+}
+
+.key {
+    width: calc(25% - 2px);
+    height: 100%;
+    border: 1px solid black;
+}
+
+.prop {
+    height: 100px;
+    width: 100%;
+    background-color: yellow;
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 40px;
+    opacity: 1;
+    transition: opacity 0.1s;
+    border: 1px solid black;
+}
+
+.line {
+    position: absolute;
+    bottom: 50px;
+    width: 100%;
+    height: 10px;
+    background-color: rgba(243, 19, 19, 0.363);
+}
+
+
+.combo {
+    position: absolute;
+    left: 10px;
+    top: 10px;
+    border: 1px solid black;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+video{
+    width: 100%;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    z-index: -1;
+}
+
+.slide-in-top {
+    -webkit-animation: slide-in-top 1s linear both;
+    animation: slide-in-top 1s linear both;
+}
+
+@-webkit-keyframes slide-in-top {
+    0% {
+        -webkit-transform: translateY(-1000px);
+        transform: translateY(-1000px);
+    }
+
+    100% {
+        -webkit-transform: translateY(150px);
+        transform: translateY(150px);
+    }
+}
+
+@keyframes slide-in-top {
+    0% {
+        -webkit-transform: translateY(-1000px);
+        transform: translateY(-1000px);
+    }
+
+    100% {
+        -webkit-transform: translateY(150px);
+        transform: translateY(150px);
+    }
+}
+
+
+
+.progre {
+    width: 30%;
+    position: absolute;
+    bottom: 0px;
+    left: 0;
+    margin: 0;
+    padding: 0;
+    background-color: green;
+    height: 10px;
+}
