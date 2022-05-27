@@ -10,6 +10,9 @@
     background-color: rgba(240, 248, 255, 0.397);
     border-radius: 10px;
 }
+*{
+    font-family: 'Poppins', sans-serif;
+}
 
 html, body {
     overflow-y: hidden;
@@ -36,13 +39,13 @@ html, body {
     border: 1px solid black;
 }
 
-.key input{
+.key input {
     width: calc(100% - 2px);
     padding: 0px;
     border: 1px solid black;
 }
 
-.log{
+.log {
     position: absolute;
     right: 10px;
     top: 50%;
@@ -54,7 +57,7 @@ html, body {
     overflow-y: auto;
 }
 
-.key button{
+.key button {
     width: 100%;
     text-align: center;
 }
@@ -79,7 +82,26 @@ html, body {
     justify-content: center;
 }
 
-video{
+#combo {
+    font-size: 50px;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 15px;
+    z-index: 1000;
+}
+
+#points{
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    top: unset;
+    background-color: rgba(240, 248, 255, 0.733);
+    font-size: 70px;
+    border-radius: 20px;
+}
+
+video {
     width: 100%;
     position: absolute;
     left: 50%;
@@ -91,6 +113,37 @@ video{
 .slide-in-top {
     -webkit-animation: slide-in-top 1s linear both;
     animation: slide-in-top 1s linear both;
+}
+
+.songlist {
+    position: absolute;
+    width: 90%;
+    height: 90%;
+    border: 1px solid black;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 15px;
+    display: flex;
+    padding: 10px;
+}
+
+.songlist .song {
+    display: flex;
+    align-items: center;
+    height: 100px;
+    border: 1px solid black;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.song img {
+    height: 100%;
+    border-radius: 10px;
+}
+
+.song h1 {
+    font-size: 20px;
 }
 
 @-webkit-keyframes slide-in-top {

@@ -1,95 +1,5 @@
 let combo = 0
 
-const test = {
-  name: 'SEXO',
-  length: 100,
-  musicurl:
-    'https://ia600605.us.archive.org/8/items/NeverGonnaGiveYouUp/jocofullinterview41.mp3',
-  notes: [
-    {
-      tick: 1000,
-      key: 'full',
-      letter: ' ',
-    },
-    {
-      tick: 19500,
-      key: 0,
-      letter: 'w',
-    },
-    {
-      tick: 20000,
-      key: 1,
-      letter: 'e',
-    },
-
-    {
-      tick: 20200,
-      key: 2,
-      letter: 'r',
-    },
-    {
-      tick: 20300,
-      key: 'full',
-      letter: ' ',
-    },
-    {
-      tick: 20400,
-      key: 2,
-      letter: 'n',
-    },
-    {
-      tick: 20500,
-      key: 3,
-      letter: 'o',
-    },
-  ],
-}
-const vtinto = {
-  name: 'VINO TINTO',
-  length: 100,
-  musicurl:
-    'https://dl1.iyoutubetomp4.com/file/youtubeNOjgze5Nmzc134.mp4?fn=Estopa%20-%20Vino%20Tinto.mp4',
-  notes: [
-    {
-      tick: 1100,
-      key: 0,
-      letter: 'H',
-    },
-    {
-      tick: 1200,
-      key: 1,
-      letter: 'A',
-    },
-
-    {
-      tick: 1300,
-      key: 2,
-      letter: 'Y',
-    },
-    {
-      tick: 2000,
-      key: 0,
-      letter: '',
-    },
-    {
-      tick: 2100,
-      key: 1,
-      letter: '',
-    },
-    {
-      tick: 2200,
-      key: 2,
-      letter: '',
-    },
-    {
-      tick: 2300,
-      key: 2,
-      letter: '',
-    },
-  ],
-}
-
-var selectedsong = vtinto
 
 const notes = {
   '0': {
@@ -107,6 +17,7 @@ const notes = {
 }
 
 var playing = false
+selectedsong = JSON.parse(localStorage.getItem('song'))
 
 function startup() {
   if (!playing) {
@@ -115,66 +26,73 @@ function startup() {
     document.getElementById('music').onplay = function () {
       start()
     }
+    document.getElementById('music').onended = function(){
+        location.replace('index.html')
+    }
     playing = true
   }
 }
 
 function set_song(song) {
-    selectedsong.musicurl = song
-    startup()
+  selectedsong.musicurl = song
+  startup()
 }
 
 function render_notes(params) {
   $('.line').html('')
   $('.log').html('')
-  var i = 0;
+  var i = 0
   selectedsong.notes.forEach((note) => {
-    if (note.key != 'full') {
-      $('.line').append(`
-                  <div class="prop " id="note${note.tick}" style="width: ${$(
-        '#key' + (note.key + 1),
-      ).css('width')};left:${
-        parseInt($('#key' + (note.key + 1)).css('width')) * note.key +
-        2 * note.key
-      }px; animation-delay: ${note.tick - 1000}ms;  bottom:${
-        note.tick
-      };" data-key="${note.key}" data-time="${note.tick}">${note.letter}</div>
-                  `)
-    } else {
-      $('.line').append(`
-                  <div class="prop " id="note${
-                    note.tick
-                  }" style="width: calc(100% - 2px);left:1px; bottom:${
-        note.tick
-      }; animation-delay: ${note.tick - 1000}ms;" data-key="${
-        note.key
-      }" data-time="${note.tick}">${note.letter}</div>
-                  `)
+    if (
+      note.tick + 1000 >
+      Math.round(document.getElementById('music').currentTime * 1000)
+    ) {
+      if (note.key != 'full') {
+        $('.line').append(`
+                        <div class="prop " id="note${
+                          note.tick
+                        }" style="width: ${$('#key' + (note.key + 1)).css(
+          'width',
+        )};left:${
+          parseInt($('#key' + (note.key + 1)).css('width')) * note.key +
+          2 * note.key
+        }px; animation-delay: ${note.tick - 1000}ms;  bottom:${
+          note.tick
+        };" data-key="${note.key}" data-time="${note.tick}">${note.letter}</div>
+                        `)
+      } else {
+        $('.line').append(`
+                        <div class="prop " id="note${
+                          note.tick
+                        }" style="width: calc(100% - 2px);left:1px; bottom:${
+          note.tick
+        }; animation-delay: ${note.tick - 1000}ms;" data-key="${
+          note.key
+        }" data-time="${note.tick}">${note.letter}</div>
+                        `)
+      }
+
+      let d = {
+        0: '',
+        1: '',
+        2: '',
+        3: '',
+      }
+
+      d[note.key] = 'selected'
+
+      $('.log').append(`<div class="note">
+              ${i} /  <select onchange="change_note_key(${i}, this.value)" value="${note.key}">
+              
+              <option value="0" ${d[0]}>D</option>
+              <option value="1" ${d[1]}>F</option>
+              <option value="2" ${d[2]}>J</option>
+              <option value="3" ${d[3]}>K</option>
+              
+              </select> / <input type="text" value="${note.letter}" onchange="change_note_letter(${i}, this.value)"> / <input type="number" value="${note.tick}" onchange="change_note_tick(${i}, this.value)"> / <strong onclick="delete_note(${i})" class="error">ELIMINAR</strong>
+          </div>`)
+      i++
     }
-
-
-
-    let d = {
-     0: '',
-     1: '',
-     2: '',
-     3: ''
-    }
-
-    d[note.key] = 'selected';
-
-
-    $('.log').append(`<div class="note">
-        ${i} /  <select onchange="change_note_key(${i}, this.value)" value="${note.key}">
-        
-        <option value="0" ${d[0]}>D</option>
-        <option value="1" ${d[1]}>F</option>
-        <option value="2" ${d[2]}>J</option>
-        <option value="3" ${d[3]}>K</option>
-        
-        </select> / <input type="text" value="${note.letter}" onchange="change_note_letter(${i}, this.value)"> / <input type="number" value="${note.tick}" onchange="change_note_tick(${i}, this.value)"> / <strong onclick="delete_note(${i})" class="error">ELIMINAR</strong>
-    </div>`)
-    i++
   })
   $('.prop').on('animationend', (e) => {
     $(e).remove()
@@ -191,24 +109,24 @@ function get_saved() {
 }
 
 function delete_note(note) {
-    delete selectedsong.notes[note]
-    selectedsong.notes.sort()
-    render_notes()
+  delete selectedsong.notes[note]
+  selectedsong.notes.sort()
+  render_notes()
 }
 
 function change_note_tick(note, value) {
-    selectedsong.notes[note].tick = value
-    render_notes()
+  selectedsong.notes[note].tick = value
+  render_notes()
 }
 
 function change_note_letter(note, value) {
-    selectedsong.notes[note].letter = value
-    render_notes()
+  selectedsong.notes[note].letter = value
+  render_notes()
 }
 
 function change_note_key(note, value) {
-    selectedsong.notes[note].key = value
-    render_notes()
+  selectedsong.notes[note].key = value
+  render_notes()
 }
 
 function add_note(key, letter = '') {

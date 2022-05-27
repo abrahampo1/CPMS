@@ -6,64 +6,94 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="css/main.css" />
     <title>Document</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+      rel="stylesheet"
+    />
   </head>
   <body>
-      <div class="combo" id="combo">
-          0
-      </div>
-      <div class="combo" id="tick" style="top: 80px;">
-        0
+    <div class="combo" id="combo">
+      0
+    </div>
+    <div class="combo" id="tick" style="top: 80px;">
+      0
     </div>
     <div class="combo" id="points" style="top: 150px;">
-        0
+      0
     </div>
     <div class="keyboard">
       <div id="key1" class="key">
-        <button onclick="add_note(0,document.getElementById('key1_text').value.toUpperCase())">ADD</button>
-        <input type="text" id="key1_text">
+        <button
+          onclick="add_note(0,document.getElementById('key1_text').value.toUpperCase())"
+        >
+          ADD
+        </button>
+        <input type="text" id="key1_text" />
       </div>
       <div id="key2" class="key">
-        <button onclick="add_note(1,document.getElementById('key2_text').value.toUpperCase())">ADD</button>
+        <button
+          onclick="add_note(1,document.getElementById('key2_text').value.toUpperCase())"
+        >
+          ADD
+        </button>
 
-        <input type="text" id="key2_text">
+        <input type="text" id="key2_text" />
       </div>
       <div id="key3" class="key">
-        <button onclick="add_note(2, document.getElementById('key3_text').value.toUpperCase())">ADD</button>
+        <button
+          onclick="add_note(2, document.getElementById('key3_text').value.toUpperCase())"
+        >
+          ADD
+        </button>
 
-        <input type="text" id="key3_text">
+        <input type="text" id="key3_text" />
       </div>
       <div id="key4" class="key">
-        <button onclick="add_note(3, document.getElementById('key4_text').value.toUpperCase())">ADD</button>
-        <input type="text" id="key4_text">
+        <button
+          onclick="add_note(3, document.getElementById('key4_text').value.toUpperCase())"
+        >
+          ADD
+        </button>
+        <input type="text" id="key4_text" />
       </div>
-      <div class="line">
-        
-      </div>
+      <div class="line"></div>
     </div>
     <div class="progre"></div>
     <audio src="audio/stroke.wav" id="stroke" style="display: none;"></audio>
-    <audio  style="position: absolute; top: 10px; left: 10px"></audio>
-    <video id="music" src="https://dl1.iyoutubetomp4.com/file/youtubeNOjgze5Nmzc134.mp4?fn=Estopa%20-%20Vino%20Tinto.mp4" controls></video>
-    <div style="position: absolute; bottom: 10px; left: 10px">
-      <button onmousedown="document.getElementById('music').currentTime = document.getElementById('music').currentTime - 0.01">-1 FRAME</button>
-      <button onmousedown="document.getElementById('music').currentTime = document.getElementById('music').currentTime + 0.01">+1 FRAME</button>
+    <audio style="position: absolute; top: 10px; left: 10px;"></audio>
+    <video
+      id="music"
+      src="https://dl1.iyoutubetomp4.com/file/youtubeNOjgze5Nmzc134.mp4?fn=Estopa%20-%20Vino%20Tinto.mp4"
+      controls
+    ></video>
+    <div style="position: absolute; bottom: 10px; left: 10px;">
+      <button
+        onmousedown="document.getElementById('music').currentTime = document.getElementById('music').currentTime - 0.01"
+      >
+        -1 FRAME
+      </button>
+      <button
+        onmousedown="document.getElementById('music').currentTime = document.getElementById('music').currentTime + 0.01"
+      >
+        +1 FRAME
+      </button>
       <button onmousedown="render_notes()">REDRAW</button>
       <button onmousedown="save()">GUARDAR</button>
       <button onmousedown="get_saved()">RETOMAR GUARDADO</button>
-      <input type="text" onchange="set_song(this.value)">
-  </div>
-  <div class="log">
-    
-  </div>
+      <input type="text" onchange="set_song(this.value)" />
+    </div>
+    <div class="log"></div>
     <script src="js/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/party-js@latest/bundle/party.min.js"></script>
     <script src="js/main.js"></script>
     <style>
-      #music{
+      #music {
         left: 10px;
         top: 10px;
 
-        transform: translate(0,0);
+        transform: translate(0, 0);
         width: 500px;
         z-index: 100;
       }
