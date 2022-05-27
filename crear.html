@@ -82,7 +82,9 @@
       <button onmousedown="render_notes()">REDRAW</button>
       <button onmousedown="save()">GUARDAR</button>
       <button onmousedown="get_saved()">RETOMAR GUARDADO</button>
-      <button onmousedown="selectedsong = {notes: []}; render_notes()">BORRAR</button>
+      <button onmousedown="selectedsong = {notes: []}; render_notes()">
+        BORRAR
+      </button>
       <input type="text" onchange="set_song(this.value)" />
     </div>
     <div class="log"></div>
@@ -100,4 +102,16 @@
       }
     </style>
   </body>
+
+  <script>
+    document.onkeydown = (e) => {
+      if (notes.indexOf(e.key.toUpperCase()) != -1) {
+        $(
+          '#key' + (notes.indexOf(e.key.toUpperCase()) + 1) + ' .glowbox',
+        ).addClass('light')
+        add_note(notes.indexOf(e.key.toUpperCase()),'')
+
+      }
+    }
+  </script>
 </html>
