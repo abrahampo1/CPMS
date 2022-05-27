@@ -36,6 +36,17 @@ html, body {
     border: 1px solid black;
 }
 
+.key input{
+    width: calc(100% - 2px);
+    padding: 0px;
+    border: 1px solid black;
+}
+
+.key button{
+    width: 100%;
+    text-align: center;
+}
+
 .line {
     position: absolute;
     bottom: 50px;

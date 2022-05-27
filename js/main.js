@@ -85,11 +85,9 @@ const vtinto = {
       tick: 2300,
       key: 2,
       letter: '',
-    }
+    },
   ],
 }
-
-
 
 var selectedsong = vtinto
 
@@ -108,10 +106,9 @@ const notes = {
   },
 }
 
-
-
 var playing = false
-document.onclick = function () {
+
+function startup() {
   if (!playing) {
     document.getElementById('music').src = selectedsong.musicurl
     document.getElementById('music').play()
@@ -122,6 +119,11 @@ document.onclick = function () {
   }
 }
 
+function set_song(song) {
+    selectedsong.musicurl = song
+    startup()
+}
+
 function render_notes(params) {
   $('.line').html('')
   selectedsong.notes.forEach((note) => {
@@ -130,8 +132,8 @@ function render_notes(params) {
                   <div class="prop " id="note${note.tick}" style="width: ${$(
         '#key' + (note.key + 1),
       ).css('width')};left:${
-        ((parseInt($('#key' + (note.key + 1)).css('width'))) *
-        note.key) + (2 * note.key)
+        parseInt($('#key' + (note.key + 1)).css('width')) * note.key +
+        2 * note.key
       }px; animation-delay: ${note.tick - 1000}ms;  bottom:${
         note.tick
       };" data-key="${note.key}" data-time="${note.tick}">${note.letter}</div>
@@ -152,24 +154,23 @@ function render_notes(params) {
     $(e).remove()
   })
 }
-function save(){
-    localStorage.setItem('saved_song', JSON.stringify(selectedsong))
-    alert('guardado')
+function save() {
+  localStorage.setItem('saved_song', JSON.stringify(selectedsong))
+  alert('guardado')
 }
 
 function get_saved() {
-    selectedsong = JSON.parse(localStorage.getItem('saved_song'))
-    render_notes()
+  selectedsong = JSON.parse(localStorage.getItem('saved_song'))
+  render_notes()
 }
 
-
 function add_note(key, letter = '') {
-    selectedsong.notes.push({
-        tick: Math.round(document.getElementById('music').currentTime * 1000),
-        key: key,
-        letter: letter
-    })
-    render_notes()
+  selectedsong.notes.push({
+    tick: Math.round(document.getElementById('music').currentTime * 1000),
+    key: key,
+    letter: letter,
+  })
+  render_notes()
 }
 
 function start() {}
