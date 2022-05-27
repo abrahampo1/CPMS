@@ -9,8 +9,68 @@
     display: flex;
     background-color: rgba(240, 248, 255, 0.397);
     border-radius: 10px;
+    overflow: hidden;
 }
-*{
+
+.vibrate-1 {
+	-webkit-animation: vibrate-1 0.3s linear infinite both;
+	        animation: vibrate-1 0.3s linear infinite both;
+}
+
+ @-webkit-keyframes vibrate-1 {
+    0% {
+      -webkit-transform: translate(0);
+              transform: translate(0);
+    }
+    20% {
+      -webkit-transform: translate(-2px, 2px);
+              transform: translate(-2px, 2px);
+    }
+    40% {
+      -webkit-transform: translate(-2px, -2px);
+              transform: translate(-2px, -2px);
+    }
+    60% {
+      -webkit-transform: translate(2px, 2px);
+              transform: translate(2px, 2px);
+    }
+    80% {
+      -webkit-transform: translate(2px, -2px);
+              transform: translate(2px, -2px);
+    }
+    100% {
+      -webkit-transform: translate(0);
+              transform: translate(0);
+    }
+  }
+  @keyframes vibrate-1 {
+    0% {
+      -webkit-transform: translate(0);
+              transform: translate(0);
+    }
+    20% {
+      -webkit-transform: translate(-2px, 2px);
+              transform: translate(-2px, 2px);
+    }
+    40% {
+      -webkit-transform: translate(-2px, -2px);
+              transform: translate(-2px, -2px);
+    }
+    60% {
+      -webkit-transform: translate(2px, 2px);
+              transform: translate(2px, 2px);
+    }
+    80% {
+      -webkit-transform: translate(2px, -2px);
+              transform: translate(2px, -2px);
+    }
+    100% {
+      -webkit-transform: translate(0);
+              transform: translate(0);
+    }
+  }
+  
+* {
     font-family: 'Poppins', sans-serif;
 }
 
@@ -23,6 +83,21 @@ html, body {
     width: calc(25% - 2px);
     height: 100%;
     border: 1px solid black;
+    position: relative;
+}
+
+.glowbox {
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+    width: 100%;
+    height: 60px;
+    background-color: rgba(252, 252, 252, 0.178);
+}
+
+.glowbox.light {
+    background-color: rgba(252, 252, 252, 0.815);
+
 }
 
 .prop {
@@ -89,9 +164,14 @@ html, body {
     transform: translate(-50%, -50%);
     border-radius: 15px;
     z-index: 1000;
+    border: none;
+    font-weight: 800;
+    color: aliceblue;
+    -webkit-text-stroke-width: 3px;
+    -webkit-text-stroke-color: black;
 }
 
-#points{
+#points {
     position: fixed;
     bottom: 20px;
     left: 20px;
@@ -135,6 +215,7 @@ video {
     border: 1px solid black;
     border-radius: 10px;
     cursor: pointer;
+    margin: 10px;
 }
 
 .song img {

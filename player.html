@@ -4,44 +4,73 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="css/main.css" /><link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/main.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+      rel="stylesheet"
+    />
     <title>Document</title>
   </head>
   <body>
-      <div class="combo" id="combo">
-          0
-      </div>
-      <div class="combo" id="tick" style="top: 80px;">
-        0
+    <div class="combo" id="combo">
+      <h1>0</h1>
+    </div>
+    <div class="combo" id="tick" style="top: 80px;">
+      0
     </div>
     <div class="combo" id="points">
-        0
+      0
     </div>
     <div class="keyboard">
-      <div id="key1" class="key"></div>
-      <div id="key2" class="key"></div>
-      <div id="key3" class="key"></div>
-      <div id="key4" class="key"></div>
-      <div class="line">
-        
+      <div id="key1" class="key">
+        <div class="glowbox"></div>
       </div>
+      <div id="key2" class="key">
+        <div class="glowbox"></div>
+      </div>
+      <div id="key3" class="key">
+        <div class="glowbox"></div>
+      </div>
+      <div id="key4" class="key">
+        <div class="glowbox"></div>
+      </div>
+      <div class="line"></div>
     </div>
     <div class="progre"></div>
     <audio src="audio/stroke.wav" id="stroke" style="display: none;"></audio>
-    <audio  style="position: absolute; top: 10px; left: 10px"></audio>
-    <video id="music" src="https://dl1.iyoutubetomp4.com/file/youtubeNOjgze5Nmzc134.mp4?fn=Estopa%20-%20Vino%20Tinto.mp4"></video>
-    
+    <audio style="position: absolute; top: 10px; left: 10px;"></audio>
+    <video
+      id="music"
+      src="https://dl1.iyoutubetomp4.com/file/youtubeNOjgze5Nmzc134.mp4?fn=Estopa%20-%20Vino%20Tinto.mp4"
+    ></video>
+
     <script src="js/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/party-js@latest/bundle/party.min.js"></script>
     <script src="js/main.js"></script>
   </body>
 </html>
 
-
 <script>
-    document.onclick = function () {
-        startup()
-}
+  document.onclick = function () {
+    startup()
+  }
+
+  document.onkeydown = (e) => {
+    if (notes.indexOf(e.key.toUpperCase()) != -1) {
+      $('#key' + (notes.indexOf(e.key.toUpperCase()) + 1) + ' .glowbox').addClass('light')
+    }
+  }
+
+  document.onkeyup = (e) => {
+    if (notes.indexOf(e.key.toUpperCase()) != -1)  {
+      $('#key' +(notes.indexOf(e.key.toUpperCase()) + 1)  + ' .glowbox').removeClass('light')
+    }
+  }
+
+
+  document.getElementById('music').onended = function(){
+        location.replace('index.html')
+    }
 </script>

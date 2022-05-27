@@ -1,20 +1,11 @@
 let combo = 0
 
 
-const notes = {
-  '0': {
-    note: 'D',
-  },
-  '1': {
-    note: 'F',
-  },
-  '2': {
-    note: 'J',
-  },
-  '3': {
-    note: 'K',
-  },
-}
+
+
+const notes = [
+    "D", "F", "J", "K"
+]
 
 var playing = false
 selectedsong = JSON.parse(localStorage.getItem('song'))
@@ -26,9 +17,7 @@ function startup() {
     document.getElementById('music').onplay = function () {
       start()
     }
-    document.getElementById('music').onended = function(){
-        location.replace('index.html')
-    }
+    
     playing = true
   }
 }
@@ -138,6 +127,7 @@ function add_note(key, letter = '') {
   render_notes()
 }
 
+
 function start() {}
 var points = 0
 render_notes()
@@ -178,7 +168,7 @@ $('html').keydown(function (e) {
         position.top > -150 &&
         $(element).text().toUpperCase() == ''
       ) {
-        if (e.key.toUpperCase() == notes[$(element).attr('data-key')].note) {
+        if (e.key.toUpperCase() == notes[$(element).attr('data-key')]) {
           click_note(position.top)
         }
       }
@@ -192,16 +182,23 @@ $('html').keydown(function (e) {
       }
       function click_note(position) {
         combo = combo + 1
-        $('#combo').text(combo)
+        $('#combo h1').text(combo)
+        if(combo > 100){
+            $('#combo h1').addClass('vibrate-1')
+        }else{
+            $('#combo h1').removeClass('vibrate-1')
+
+        }
         $(element).css('opacity', '0')
         $(element).stop()
         if (position > -10 && position < 10) {
-          points = points + 10
+          points = points + (10 * (1+ (combo / 100)))
         } else if (position > -30 && position < 30) {
-          points = points + 5
+          points = points + (5 * (1+ (combo / 100)))
         } else if (position > -150 && position < 20) {
-          points = points + 1
+          points = points + (1 * (1+ (combo / 100)))
         }
+        points = Math.round(points)
         $('#points').text(points)
 
         setTimeout(() => {
@@ -213,6 +210,6 @@ $('html').keydown(function (e) {
   })
   if (!found) {
     combo = 0
-    $('#combo').text(combo)
+    $('#combo h1').text(combo)
   }
 })
