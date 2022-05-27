@@ -152,8 +152,27 @@ function render_notes(params) {
                   `)
     }
 
+
+
+    let d = {
+     0: '',
+     1: '',
+     2: '',
+     3: ''
+    }
+
+    d[note.key] = 'selected';
+
+
     $('.log').append(`<div class="note">
-        ${i} / ${note.key} / ${note.letter} / <input type="number" value="${note.tick}" onchange="change_note(${i}, this.value)"> / <strong onclick="delete_note(${i})" class="error">ELIMINAR</strong>
+        ${i} /  <select onchange="change_note_key(${i}, this.value)" value="${note.key}">
+        
+        <option value="0" ${d[0]}>D</option>
+        <option value="1" ${d[1]}>F</option>
+        <option value="2" ${d[2]}>J</option>
+        <option value="3" ${d[3]}>K</option>
+        
+        </select> / <input type="text" value="${note.letter}" onchange="change_note_letter(${i}, this.value)"> / <input type="number" value="${note.tick}" onchange="change_note_tick(${i}, this.value)"> / <strong onclick="delete_note(${i})" class="error">ELIMINAR</strong>
     </div>`)
     i++
   })
@@ -177,8 +196,18 @@ function delete_note(note) {
     render_notes()
 }
 
-function change_note(note, value) {
+function change_note_tick(note, value) {
     selectedsong.notes[note].tick = value
+    render_notes()
+}
+
+function change_note_letter(note, value) {
+    selectedsong.notes[note].letter = value
+    render_notes()
+}
+
+function change_note_key(note, value) {
+    selectedsong.notes[note].key = value
     render_notes()
 }
 
