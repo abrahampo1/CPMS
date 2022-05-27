@@ -51,6 +51,7 @@ html, body {
     border: 1px solid black;
     width: 30%;
     height: 90%;
+    overflow-y: auto;
 }
 
 .key button{
