@@ -143,12 +143,14 @@ setInterval(() => {
       '%',
   )
   $('.prop').each(function (index, element) {
-    $(element).css(
-      'bottom',
-
-      $(element).attr('data-time') -
-        document.getElementById('music').currentTime * 1000,
-    )
+    if(!$(element).hasClass('hitted')){
+        $(element).css(
+            'bottom',
+      
+            $(element).attr('data-time') -
+              document.getElementById('music').currentTime * 1000,
+          )
+    }
   })
 }, 1)
 
@@ -190,6 +192,8 @@ $('html').keydown(function (e) {
 
         }
         $(element).css('opacity', '0')
+        $(element).css('background-color', 'white')
+        $(element).addClass('hitted')
         $(element).stop()
         if (position > -10 && position < 10) {
           points = points + (10 * (1+ (combo / 100)))
