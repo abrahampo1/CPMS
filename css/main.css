@@ -42,6 +42,17 @@ html, body {
     border: 1px solid black;
 }
 
+.log{
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    border-radius: 10px;
+    border: 1px solid black;
+    width: 30%;
+    height: 90%;
+}
+
 .key button{
     width: 100%;
     text-align: center;

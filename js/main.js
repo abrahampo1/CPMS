@@ -126,6 +126,8 @@ function set_song(song) {
 
 function render_notes(params) {
   $('.line').html('')
+  $('.log').html('')
+  var i = 0;
   selectedsong.notes.forEach((note) => {
     if (note.key != 'full') {
       $('.line').append(`
@@ -149,6 +151,11 @@ function render_notes(params) {
       }" data-time="${note.tick}">${note.letter}</div>
                   `)
     }
+
+    $('.log').append(`<div class="note">
+        ${i} / ${note.key} / ${note.letter} / <input type="number" value="${note.tick}" onchange="change_note(${i}, this.value)"> / <strong onclick="delete_note(${i})" class="error">ELIMINAR</strong>
+    </div>`)
+    i++
   })
   $('.prop').on('animationend', (e) => {
     $(e).remove()
@@ -162,6 +169,17 @@ function save() {
 function get_saved() {
   selectedsong = JSON.parse(localStorage.getItem('saved_song'))
   render_notes()
+}
+
+function delete_note(note) {
+    delete selectedsong.notes[note]
+    selectedsong.notes.sort()
+    render_notes()
+}
+
+function change_note(note, value) {
+    selectedsong.notes[note].tick = value
+    render_notes()
 }
 
 function add_note(key, letter = '') {
